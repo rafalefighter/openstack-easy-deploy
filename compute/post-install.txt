@@ -1,0 +1,3 @@
+# run this on controller node after setup compute node
+
+    /bin/sh -c "nova-manage cell_v2 discover_hosts --verbose" nova

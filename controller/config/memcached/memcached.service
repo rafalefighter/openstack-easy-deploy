@@ -1,0 +1,18 @@
+[Unit]
+Description=memcached daemon
+Before=httpd.service
+After=network.target
+
+[Service]
+EnvironmentFile=/etc/sysconfig/memcached.conf
+ExecStart=/usr/bin/memcached -p ${PORT} -u ${USER} -m ${CACHESIZE} -c ${MAXCONN} $OPTIONS -vv > $LOGFILE 2>&1
+
+PrivateTmp=true
+ProtectSystem=full
+NoNewPrivileges=true
+PrivateDevices=true
+CapabilityBoundingSet=CAP_SETGID CAP_SETUID CAP_SYS_RESOURCE
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+
+[Install]
+WantedBy=multi-user.target
